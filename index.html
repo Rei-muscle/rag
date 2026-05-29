@@ -27,6 +27,10 @@
           <p>本地隱私型文件分析與問答系統</p>
         </div>
       </div>
+      <!-- 漢堡按鈕：行動裝置顯示側邊欄切換 -->
+      <button id="sidebar-toggle" class="sidebar-toggle" aria-controls="app-sidebar" aria-expanded="false" aria-label="切換側邊欄">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
       <div class="header-status">
         <span class="status-badge local-only">
           <span class="status-dot green"></span>
@@ -210,6 +214,8 @@
       </section>
 
     </main>
+    <!-- 側邊欄遮罩（行動裝置點擊可關閉側邊欄） -->
+    <div id="sidebar-overlay" class="sidebar-overlay hidden" tabindex="-1"></div>
   </div>
 
   <!-- 引入主逻辑 JS (Type Module) -->

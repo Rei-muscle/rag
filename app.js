@@ -70,6 +70,10 @@ const DOM = {
   dbViewerContent: document.getElementById('db-viewer-content'),
   statsChunksCount: document.getElementById('stats-chunks-count'),
   vectorDbList: document.getElementById('vector-db-list'),
+  // 側邊欄切換相關
+  sidebarToggle: document.getElementById('sidebar-toggle'),
+  sidebarOverlay: document.getElementById('sidebar-overlay'),
+  appSidebar: document.getElementById('app-sidebar') || document.querySelector('.app-sidebar'),
   
   // 聊天對話區
   chatMessages: document.getElementById('chat-messages'),
@@ -200,6 +204,30 @@ function setupEventListeners() {
   DOM.closeRefBtn.addEventListener('click', () => {
     DOM.retrievalReferences.classList.add('hidden');
   });
+
+  // 側邊欄收合開關
+  if (DOM.sidebarToggle && DOM.appSidebar && DOM.sidebarOverlay) {
+    DOM.sidebarToggle.addEventListener('click', () => {
+      const isOpen = DOM.appSidebar.classList.toggle('open');
+      DOM.sidebarOverlay.classList.toggle('hidden', !isOpen);
+      DOM.sidebarToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    DOM.sidebarOverlay.addEventListener('click', () => {
+      DOM.appSidebar.classList.remove('open');
+      DOM.sidebarOverlay.classList.add('hidden');
+      DOM.sidebarToggle.setAttribute('aria-expanded', 'false');
+    });
+
+    // 在視窗尺寸改變時自動關閉行動側邊欄（回到桌面佈局）
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 700) {
+        DOM.appSidebar.classList.remove('open');
+        DOM.sidebarOverlay.classList.add('hidden');
+        DOM.sidebarToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
 
   // 拖曳文件互動
   DOM.dropZone.addEventListener('click', () => DOM.fileInput.click());
