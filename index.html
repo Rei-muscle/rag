@@ -20,6 +20,10 @@
     
     <!-- 頂部導覽列 -->
     <header class="app-header">
+      <!-- 漢堡按鈕：行動裝置顯示側邊欄切換（放在左上） -->
+      <button id="sidebar-toggle" class="sidebar-toggle" aria-controls="app-sidebar" aria-expanded="false" aria-label="切換側邊欄">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
       <div class="header-logo">
         <span class="material-symbols-outlined logo-icon">security</span>
         <div class="logo-text">
@@ -27,10 +31,6 @@
           <p>本地隱私型文件分析與問答系統</p>
         </div>
       </div>
-      <!-- 漢堡按鈕：行動裝置顯示側邊欄切換 -->
-      <button id="sidebar-toggle" class="sidebar-toggle" aria-controls="app-sidebar" aria-expanded="false" aria-label="切換側邊欄">
-        <span class="material-symbols-outlined">menu</span>
-      </button>
       <div class="header-status">
         <span class="status-badge local-only">
           <span class="status-dot green"></span>

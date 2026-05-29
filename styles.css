@@ -451,6 +451,8 @@ body {
   .app-header {
     padding: 10px 12px;
     gap: 8px;
+    position: relative; /* for absolute-positioned hamburger */
+    height: 64px; /* reserve space so sidebar appears below */
   }
 
   .logo-text h1 {
@@ -505,9 +507,13 @@ body {
     color: var(--text-primary);
     font-size: 24px;
     padding: 8px;
-    margin-left: 8px;
     border-radius: 8px;
     cursor: pointer;
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 50;
   }
 
   .sidebar-toggle:hover {
@@ -518,7 +524,7 @@ body {
   .app-sidebar {
     position: fixed;
     left: 0;
-    top: 16px; /* match header spacing */
+    top: 64px; /* place below header */
     bottom: 16px;
     width: 320px;
     transform: translateX(-110%);
