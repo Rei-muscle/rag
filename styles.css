@@ -455,6 +455,11 @@ body {
     height: 64px; /* reserve space so sidebar appears below */
   }
 
+  /* 確保 header 內容向右留出空間，避免被漢堡按鈕覆蓋 */
+  .header-logo {
+    margin-left: 56px;
+  }
+
   .logo-text h1 {
     font-size: 1rem;
   }
@@ -532,10 +537,14 @@ body {
     z-index: 40;
     box-shadow: 0 8px 40px rgba(0,0,0,0.6);
     border-radius: 12px;
+    overflow-y: auto; /* 允許內部滾動以查看全部功能 */
+    -webkit-overflow-scrolling: touch; /* 平滑觸控滾動 */
+    max-height: calc(100vh - 80px);
   }
 
   .app-sidebar.open {
     transform: translateX(0);
+    overflow-y: auto;
   }
 
   /* 側邊遮罩 */
