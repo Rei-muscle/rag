@@ -130,6 +130,11 @@ body {
   box-shadow: 0 0 8px var(--primary-glow);
 }
 
+/* 預設隱藏漢堡按鈕（桌面） */
+.sidebar-toggle {
+  display: none;
+}
+
 /* --- 主體佈局 --- */
 .app-main {
   display: flex;
@@ -144,8 +149,10 @@ body {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  overflow: hidden;        /* 改為 hidden，讓各面板自行管理滾動 */
+  overflow-y: auto;
   min-width: 320px;
+  height: calc(100vh - 112px);
+  max-height: calc(100vh - 112px);
 }
 
 /* --- 可調整高度的雙面板容器 --- */
@@ -427,6 +434,11 @@ body {
 }
 
 @media (max-width: 700px) {
+  .app-container {
+    height: auto;
+    min-height: 100vh;
+  }
+
   /* Stack main columns vertically */
   .app-main {
     flex-direction: column;
@@ -437,10 +449,11 @@ body {
   .app-sidebar {
     width: 100%;
     min-width: 0;
-    max-height: 40vh;
+    max-height: calc(100vh - 100px);
     overflow-y: auto;
     border-radius: 12px;
     padding: 8px;
+    display: none;
   }
 
   .chat-container {
@@ -501,7 +514,6 @@ body {
     min-height: 40px;
   }
 
-  /* 漢堡按鈕（只在小螢幕顯示） */
   .sidebar-toggle {
     display: inline-flex;
     align-items: center;
@@ -525,41 +537,30 @@ body {
     background: rgba(255,255,255,0.03);
   }
 
-  /* 側邊欄滑出/隱藏行為（行動裝置） */
   .app-sidebar {
-    position: fixed;
-    left: 0;
-    top: 64px; /* place below header */
-    bottom: 16px;
-    width: 320px;
-    transform: translateX(-110%);
-    transition: transform 0.28s ease, box-shadow 0.28s ease;
-    z-index: 40;
-    box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+    position: relative;
+    left: auto;
+    top: auto;
+    bottom: auto;
+    transform: none;
+    width: 100%;
+    transition: none;
+    z-index: auto;
+    box-shadow: none;
     border-radius: 12px;
-    overflow-y: auto; /* 允許內部滾動以查看全部功能 */
-    -webkit-overflow-scrolling: touch; /* 平滑觸控滾動 */
-    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    max-height: calc(100vh - 100px);
+    padding-bottom: 20px;
+    display: none;
   }
 
   .app-sidebar.open {
-    transform: translateX(0);
-    overflow-y: auto;
+    display: block;
   }
 
-  /* 側邊遮罩 */
   .sidebar-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
-    z-index: 30;
-    opacity: 1;
-    transition: opacity 0.2s ease;
-  }
-
-  .sidebar-overlay.hidden {
-    opacity: 0;
-    pointer-events: none;
+    display: none !important;
   }
 }
 
@@ -730,15 +731,14 @@ body {
 
 /* --- 向量資料庫視覺化區域 --- */
 .collapsible-trigger {
-  cursor: pointer;
+  cursor: default;
   display: flex;
   align-items: center;
   position: relative;
 }
 
 .expand-arrow {
-  margin-left: auto;
-  transition: var(--transition-smooth);
+  display: none;
 }
 
 .collapsible-trigger:not(.collapsed) .expand-arrow {
@@ -746,14 +746,15 @@ body {
 }
 
 .collapsible-content {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease-out;
+  max-height: none !important;
+  overflow: visible !important;
+  transition: none !important;
+  margin-top: 12px;
 }
 
 .collapsible-content:not(.collapsed) {
-  max-height: 350px;
-  overflow-y: auto;
+  max-height: none !important;
+  overflow: visible !important;
   margin-top: 12px;
 }
 
@@ -1239,10 +1240,11 @@ body {
   .app-sidebar {
     width: 100%;
     min-width: 0;
-    overflow-y: visible;
+    overflow-y: auto;
+    max-height: calc(100vh - 120px);
   }
   .chat-container {
-    height: 500px;
-    flex: none;
+    height: auto;
+    flex: 1;
   }
 }
